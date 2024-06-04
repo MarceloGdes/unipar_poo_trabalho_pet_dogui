@@ -8,6 +8,6 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 public class Raca {
-    private Long id;
+    private int id;
     private String desc;
 }
