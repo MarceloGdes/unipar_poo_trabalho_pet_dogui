@@ -8,7 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 public class Pelagem {
-    private Long id;
+    private int id;
     private String desc;
 
 }
