@@ -9,8 +9,8 @@ public class CachorroRepository {
     private static final String INSERT =
             "INSERT INTO cachorro(nome, vl_tamanho, st_perfume, dt_nascimento, id_raca, id_pelagem, id_cor) VALUES(?, ?, ?, ?, ?, ?, ?)";
 
-    private static final String UPDATE =
-            "UPDATE cachorro SET ?=? WHERE id=?";
+    private static final String UPDATE_NOME =
+            "UPDATE cachorro SET nome=? WHERE id=?";
 
     private static final String DELETE =
             "DELETE FROM cachorro WHERE id=?";
@@ -52,6 +52,29 @@ public class CachorroRepository {
             if (pstmt != null) pstmt.close();
             if (conn != null) conn.close();
             if (rs != null) rs.close();
+        }
+
+        return cachorro;
+    }
+
+    public Cachorro updateNome(Cachorro cachorro) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ps = null;
+
+        try {
+
+            conn = new ConnectionFactory().getConnection();
+
+            ps = conn.prepareStatement(UPDATE_NOME);
+            ps.setString(1, cachorro.getNome());
+            ps.setInt(2, cachorro.getId());
+            ps.executeUpdate();
+
+        }finally {
+            if (ps != null)
+                ps.close();
+            if (conn != null)
+                conn.close();
         }
 
         return cachorro;
