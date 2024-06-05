@@ -4,14 +4,16 @@ import br.unipar.domain.Cachorro;
 import br.unipar.domain.Cor;
 import br.unipar.domain.Pelagem;
 import br.unipar.infrastructure.ConnectionFactory;
+import br.unipar.services.CorService;
+import br.unipar.services.PelagemService;
 
 import java.sql.*;
 import java.util.ArrayList;
 
 public class CachorroRepository {
 
-    private PelagemRepository pelagemRepository = new PelagemRepository();
-    private CorRepository corRepository = new CorRepository();
+    private PelagemService pelagemService = new PelagemService();
+    private CorService corService = new CorService();
     private static final String INSERT =
             "INSERT INTO cachorro(nome, vl_tamanho, st_perfume, dt_nascimento, id_raca, id_pelagem, id_cor) VALUES(?, ?, ?, ?, ?, ?, ?)";
 
@@ -107,10 +109,10 @@ public class CachorroRepository {
                 retorno.setStPerfume(rs.getBoolean("st_perfume"));
                 retorno.setDtNascimento(rs.getDate("dt_nascimento"));
 
-                Pelagem pelagem = pelagemRepository.findById(rs.getInt("pelagem_id"));
+                Pelagem pelagem = pelagemService.findById(rs.getInt("pelagem_id"));
                 retorno.setPelagem(pelagem);
 
-                Cor cor = corRepository.findById(rs.getInt("cor_id"));
+                Cor cor = corService.findById(rs.getInt("cor_id"));
                 retorno.setCor(cor);
 
                 //TODO: Consulta no banco de raca, pelagem e cor para ser criado o objeto e então setado no objeto cachorro
@@ -152,10 +154,10 @@ public class CachorroRepository {
                 cachorro.setStPerfume(rs.getBoolean("st_perfume"));
                 cachorro.setDtNascimento(rs.getDate("dt_nascimento"));
 
-                Pelagem pelagem = pelagemRepository.findById(rs.getInt("pelagem_id"));
+                Pelagem pelagem = pelagemService.findById(rs.getInt("pelagem_id"));
                 cachorro.setPelagem(pelagem);
 
-                Cor cor = corRepository.findById(rs.getInt("cor_id"));
+                Cor cor = corService.findById(rs.getInt("cor_id"));
                 cachorro.setCor(cor);
                 //TODO: Consulta no banco de raca, pelagem e cor para ser criado o objeto e então setado no objeto cachorro
                 //Aguardando o repositório ser criado
