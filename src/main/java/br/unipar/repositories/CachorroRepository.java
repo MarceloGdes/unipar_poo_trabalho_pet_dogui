@@ -19,6 +19,18 @@ public class CachorroRepository {
 
     private static final String UPDATE_NOME =
             "UPDATE cachorro SET nome=? WHERE id=?";
+    private static final String UPDATE_VL_TAMANHO =
+            "UPDATE cachorro SET vl_tamanho=? WHERE id=?";
+    private static final String UPDATE_ST_PERFUME =
+            "UPDATE cachorro SET st_perfume=? WHERE id=?";
+    private static final String UPDATE_DT_NASCIMENTO =
+            "UPDATE cachorro SET dt_nascimento=? WHERE id=?";
+    private static final String UPDATE_ID_RACA =
+            "UPDATE cachorro SET id_raca=? WHERE id=?";
+    private static final String UPDATE_ID_PELAGEM =
+            "UPDATE cachorro SET id_pelagem=? WHERE id=?";
+    private static final String UPDATE_ID_COR =
+            "UPDATE cachorro SET id_cor=? WHERE id=?";
 
     private static final String DELETE =
             "DELETE FROM cachorro WHERE id=?";
@@ -87,6 +99,141 @@ public class CachorroRepository {
 
         return cachorro;
     }
+    public Cachorro updateVlTamanho(Cachorro cachorro) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ps = null;
+
+        try {
+
+            conn = new ConnectionFactory().getConnection();
+
+            ps = conn.prepareStatement(UPDATE_VL_TAMANHO);
+            ps.setDouble(1, cachorro.getTamanho());
+            ps.setInt(2, cachorro.getId());
+            ps.executeUpdate();
+
+        }finally {
+            if (ps != null)
+                ps.close();
+            if (conn != null)
+                conn.close();
+        }
+
+        return cachorro;
+    }
+    public Cachorro updateStPerfume(Cachorro cachorro) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ps = null;
+
+        try {
+
+            conn = new ConnectionFactory().getConnection();
+
+            ps = conn.prepareStatement(UPDATE_ST_PERFUME);
+            ps.setBoolean(1, cachorro.isStPerfume());
+            ps.setInt(2, cachorro.getId());
+            ps.executeUpdate();
+
+        }finally {
+            if (ps != null)
+                ps.close();
+            if (conn != null)
+                conn.close();
+        }
+
+        return cachorro;
+    }
+    public Cachorro updateDtNascimento(Cachorro cachorro) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ps = null;
+
+        try {
+
+            conn = new ConnectionFactory().getConnection();
+
+            ps = conn.prepareStatement(UPDATE_DT_NASCIMENTO);
+            ps.setDate(1, new Date(
+                    cachorro.getDtNascimento().getTime()
+            ));
+            ps.setInt(2, cachorro.getId());
+            ps.executeUpdate();
+
+        }finally {
+            if (ps != null)
+                ps.close();
+            if (conn != null)
+                conn.close();
+        }
+
+        return cachorro;
+    }
+    public Cachorro updateIdRaca(Cachorro cachorro, int id) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ps = null;
+
+        try {
+
+            conn = new ConnectionFactory().getConnection();
+
+            ps = conn.prepareStatement(UPDATE_ID_RACA);
+            ps.setInt(1, id);
+            ps.setInt(2, cachorro.getId());
+            ps.executeUpdate();
+
+        }finally {
+            if (ps != null)
+                ps.close();
+            if (conn != null)
+                conn.close();
+        }
+
+        return cachorro;
+    }
+    public Cachorro updateIdPelagem(Cachorro cachorro, int id) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ps = null;
+
+        try {
+
+            conn = new ConnectionFactory().getConnection();
+
+            ps = conn.prepareStatement(UPDATE_ID_PELAGEM);
+            ps.setInt(1, id);
+            ps.setInt(2, cachorro.getId());
+            ps.executeUpdate();
+
+        }finally {
+            if (ps != null)
+                ps.close();
+            if (conn != null)
+                conn.close();
+        }
+
+        return cachorro;
+    }
+    public Cachorro updateIdCor(Cachorro cachorro, int id) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ps = null;
+
+        try {
+
+            conn = new ConnectionFactory().getConnection();
+
+            ps = conn.prepareStatement(UPDATE_ID_COR);
+            ps.setInt(1, id);
+            ps.setInt(2, cachorro.getId());
+            ps.executeUpdate();
+
+        }finally {
+            if (ps != null)
+                ps.close();
+            if (conn != null)
+                conn.close();
+        }
+
+        return cachorro;
+    }
+
 
     public Cachorro findById(int id) throws SQLException {
         Connection conn = null;
@@ -109,11 +256,12 @@ public class CachorroRepository {
                 retorno.setStPerfume(rs.getBoolean("st_perfume"));
                 retorno.setDtNascimento(rs.getDate("dt_nascimento"));
 
-                Pelagem pelagem = pelagemService.findById(rs.getInt("pelagem_id"));
+                Pelagem pelagem = pelagemService.findById(rs.getInt("id_pelagem"));
                 retorno.setPelagem(pelagem);
 
-                Cor cor = corService.findById(rs.getInt("cor_id"));
+                Cor cor = corService.findById(rs.getInt("id_cor"));
                 retorno.setCor(cor);
+
 
                 //TODO: Consulta no banco de raca, pelagem e cor para ser criado o objeto e então setado no objeto cachorro
                 //Aguardando o repositório ser criado
@@ -154,10 +302,10 @@ public class CachorroRepository {
                 cachorro.setStPerfume(rs.getBoolean("st_perfume"));
                 cachorro.setDtNascimento(rs.getDate("dt_nascimento"));
 
-                Pelagem pelagem = pelagemService.findById(rs.getInt("pelagem_id"));
+                Pelagem pelagem = pelagemService.findById(rs.getInt("id_pelagem"));
                 cachorro.setPelagem(pelagem);
 
-                Cor cor = corService.findById(rs.getInt("cor_id"));
+                Cor cor = corService.findById(rs.getInt("id_cor"));
                 cachorro.setCor(cor);
                 //TODO: Consulta no banco de raca, pelagem e cor para ser criado o objeto e então setado no objeto cachorro
                 //Aguardando o repositório ser criado

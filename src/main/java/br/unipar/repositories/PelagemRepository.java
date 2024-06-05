@@ -153,7 +153,7 @@ public class PelagemRepository {
         try{
             conexao = new ConnectionFactory().getConnection();
             prepared = conexao.prepareStatement(FIND_BY_ID);
-            prepared.setInt(1, retorno.getId());
+            prepared.setInt(1, id);
             result = prepared.executeQuery();
             
             if(result.next()){
