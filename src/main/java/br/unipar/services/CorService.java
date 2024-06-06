@@ -63,7 +63,7 @@ public class CorService {
             throw new NegocioException("A descrição da Cor "
                     + "deve ser Informada.");
         }
-        if (cor.getDesc().length() <= 4) {
+        if (cor.getDesc().length() < 3) {
             throw new NegocioException("A descrição da Cor "
                     + "deve possuir 4 "
                     + "ou mais caracteres.");

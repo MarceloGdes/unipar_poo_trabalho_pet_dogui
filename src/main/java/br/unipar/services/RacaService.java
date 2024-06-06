@@ -50,7 +50,7 @@ public class RacaService {
         if (raca.getDesc().isBlank()) {
             throw new NegocioException("A descrição da Raça deve ser informada.");
         }
-        if (raca.getDesc().length() <= 4) {
+        if (raca.getDesc().length() < 3) {
             throw new NegocioException("A descrição da Raça deve possuir 4 ou mais caracteres.");
         }
         if (raca.getDesc().length() > 60) {

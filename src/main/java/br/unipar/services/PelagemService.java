@@ -30,12 +30,12 @@ public class PelagemService {
             throw new NegocioException("A descrição deve ser preenchida.");
         }
         
-        if(pelagem.getDesc().length() > 20){
-            throw new NegocioException("A descrição da pelagem pode possuir até 20 caracteres.");
+        if(pelagem.getDesc().length() > 60){
+            throw new NegocioException("A descrição da pelagem pode possuir até 60 caracteres.");
         }
         
         if(pelagem.getDesc().length() < 3){
-            throw new NegocioException("A descrição deve possuir no mínimo 3 caracteres");
+            throw new NegocioException("A descrição deve possuir no mínimo 4 caracteres");
         }
         
         if(pelagem.getDesc().isBlank()){
