@@ -63,7 +63,7 @@ public class CorService {
             throw new NegocioException("A descrição da Cor "
                     + "deve ser Informada.");
         }
-        if (cor.getDesc().length() <= 4) {
+        if (cor.getDesc().length() < 3) {
             throw new NegocioException("A descrição da Cor "
                     + "deve possuir 4 "
                     + "ou mais caracteres.");
@@ -72,6 +72,9 @@ public class CorService {
             throw new NegocioException("A descrição da Cor "
                     + "não deve possuir "
                     + "mais do que 60 caracteres");
+        }
+        if (!cor.getDesc().matches("[a-zA-Z\\s]+")) { //Expressão regular (regex).
+            throw new NegocioException("A descrição deve conter apenas letras e espaços.");
         }
     }
 

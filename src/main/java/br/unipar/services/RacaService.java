@@ -50,11 +50,14 @@ public class RacaService {
         if (raca.getDesc().isBlank()) {
             throw new NegocioException("A descrição da Raça deve ser informada.");
         }
-        if (raca.getDesc().length() <= 4) {
+        if (raca.getDesc().length() < 3) {
             throw new NegocioException("A descrição da Raça deve possuir 4 ou mais caracteres.");
         }
         if (raca.getDesc().length() > 60) {
             throw new NegocioException("A descrição da Raça não deve possuir mais do que 60 caracteres.");
+        }
+        if (!raca.getDesc().matches("[a-zA-Z\\s]+")) { //Expressão regular (regex).
+            throw new NegocioException("A descrição deve conter apenas letras e espaços.");
         }
     }
 
