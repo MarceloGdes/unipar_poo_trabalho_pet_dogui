@@ -73,6 +73,9 @@ public class CorService {
                     + "não deve possuir "
                     + "mais do que 60 caracteres");
         }
+        if (!cor.getDesc().matches("[a-zA-Z\\s]+")) { //Expressão regular (regex).
+            throw new NegocioException("A descrição deve conter apenas letras e espaços.");
+        }
     }
 
     private void validateUpdate(Cor cor) throws NegocioException {
