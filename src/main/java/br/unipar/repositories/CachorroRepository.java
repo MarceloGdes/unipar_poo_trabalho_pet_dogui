@@ -3,9 +3,11 @@ package br.unipar.repositories;
 import br.unipar.domain.Cachorro;
 import br.unipar.domain.Cor;
 import br.unipar.domain.Pelagem;
+import br.unipar.domain.Raca;
 import br.unipar.infrastructure.ConnectionFactory;
 import br.unipar.services.CorService;
 import br.unipar.services.PelagemService;
+import br.unipar.services.RacaService;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,6 +16,7 @@ public class CachorroRepository {
 
     private PelagemService pelagemService = new PelagemService();
     private CorService corService = new CorService();
+    private RacaService racaService = new RacaService();
     private static final String INSERT =
             "INSERT INTO cachorro(nome, vl_tamanho, st_perfume, dt_nascimento, id_raca, id_pelagem, id_cor) VALUES(?, ?, ?, ?, ?, ?, ?)";
 
@@ -262,10 +265,8 @@ public class CachorroRepository {
                 Cor cor = corService.findById(rs.getInt("id_cor"));
                 retorno.setCor(cor);
 
-
-                //TODO: Consulta no banco de raca, pelagem e cor para ser criado o objeto e então setado no objeto cachorro
-                //Aguardando o repositório ser criado
-//                retorno.setRaca();
+                Raca raca = racaService.findById(rs.getInt("id_raca"));
+                retorno.setRaca(raca);
 
             }
         }finally {
@@ -307,6 +308,10 @@ public class CachorroRepository {
 
                 Cor cor = corService.findById(rs.getInt("id_cor"));
                 cachorro.setCor(cor);
+
+                Raca raca = racaService.findById(rs.getInt("id_raca"));
+                cachorro.setRaca(raca);
+
                 //TODO: Consulta no banco de raca, pelagem e cor para ser criado o objeto e então setado no objeto cachorro
                 //Aguardando o repositório ser criado
 //                cachorro.setRaca();
