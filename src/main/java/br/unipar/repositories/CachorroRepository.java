@@ -20,20 +20,8 @@ public class CachorroRepository {
     private static final String INSERT =
             "INSERT INTO cachorro(nome, vl_tamanho, st_perfume, dt_nascimento, id_raca, id_pelagem, id_cor) VALUES(?, ?, ?, ?, ?, ?, ?)";
 
-    private static final String UPDATE_NOME =
-            "UPDATE cachorro SET nome=? WHERE id=?";
-    private static final String UPDATE_VL_TAMANHO =
-            "UPDATE cachorro SET vl_tamanho=? WHERE id=?";
-    private static final String UPDATE_ST_PERFUME =
-            "UPDATE cachorro SET st_perfume=? WHERE id=?";
-    private static final String UPDATE_DT_NASCIMENTO =
-            "UPDATE cachorro SET dt_nascimento=? WHERE id=?";
-    private static final String UPDATE_ID_RACA =
-            "UPDATE cachorro SET id_raca=? WHERE id=?";
-    private static final String UPDATE_ID_PELAGEM =
-            "UPDATE cachorro SET id_pelagem=? WHERE id=?";
-    private static final String UPDATE_ID_COR =
-            "UPDATE cachorro SET id_cor=? WHERE id=?";
+    private static final String UPDATE =
+            "UPDATE cachorro SET nome=?, vl_tamanho=?, st_perfume=?, dt_nascimento=?, id_raca=?, id_pelagem=?, id_cor=?  WHERE id=?";
 
     private static final String DELETE =
             "DELETE FROM cachorro WHERE id=?";
@@ -80,7 +68,7 @@ public class CachorroRepository {
         return cachorro;
     }
 
-    public Cachorro updateNome(Cachorro cachorro) throws SQLException {
+    public Cachorro update(Cachorro cachorro) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
 
@@ -88,9 +76,14 @@ public class CachorroRepository {
 
             conn = new ConnectionFactory().getConnection();
 
-            ps = conn.prepareStatement(UPDATE_NOME);
+            ps = conn.prepareStatement(UPDATE);
             ps.setString(1, cachorro.getNome());
-            ps.setInt(2, cachorro.getId());
+            ps.setDouble(2, cachorro.getTamanho());
+            ps.setBoolean(3, cachorro.isStPerfume());
+            ps.setDate(4, new Date(cachorro.getDtNascimento().getTime()));
+            ps.setInt(5, cachorro.getRaca().getId());
+            ps.setInt(6, cachorro.getPelagem().getId());
+            ps.setInt(7, cachorro.getCor().getId());
             ps.executeUpdate();
 
         }finally {
@@ -102,141 +95,6 @@ public class CachorroRepository {
 
         return cachorro;
     }
-    public Cachorro updateVlTamanho(Cachorro cachorro) throws SQLException {
-        Connection conn = null;
-        PreparedStatement ps = null;
-
-        try {
-
-            conn = new ConnectionFactory().getConnection();
-
-            ps = conn.prepareStatement(UPDATE_VL_TAMANHO);
-            ps.setDouble(1, cachorro.getTamanho());
-            ps.setInt(2, cachorro.getId());
-            ps.executeUpdate();
-
-        }finally {
-            if (ps != null)
-                ps.close();
-            if (conn != null)
-                conn.close();
-        }
-
-        return cachorro;
-    }
-    public Cachorro updateStPerfume(Cachorro cachorro) throws SQLException {
-        Connection conn = null;
-        PreparedStatement ps = null;
-
-        try {
-
-            conn = new ConnectionFactory().getConnection();
-
-            ps = conn.prepareStatement(UPDATE_ST_PERFUME);
-            ps.setBoolean(1, cachorro.isStPerfume());
-            ps.setInt(2, cachorro.getId());
-            ps.executeUpdate();
-
-        }finally {
-            if (ps != null)
-                ps.close();
-            if (conn != null)
-                conn.close();
-        }
-
-        return cachorro;
-    }
-    public Cachorro updateDtNascimento(Cachorro cachorro) throws SQLException {
-        Connection conn = null;
-        PreparedStatement ps = null;
-
-        try {
-
-            conn = new ConnectionFactory().getConnection();
-
-            ps = conn.prepareStatement(UPDATE_DT_NASCIMENTO);
-            ps.setDate(1, new Date(
-                    cachorro.getDtNascimento().getTime()
-            ));
-            ps.setInt(2, cachorro.getId());
-            ps.executeUpdate();
-
-        }finally {
-            if (ps != null)
-                ps.close();
-            if (conn != null)
-                conn.close();
-        }
-
-        return cachorro;
-    }
-    public Cachorro updateIdRaca(Cachorro cachorro, int id) throws SQLException {
-        Connection conn = null;
-        PreparedStatement ps = null;
-
-        try {
-
-            conn = new ConnectionFactory().getConnection();
-
-            ps = conn.prepareStatement(UPDATE_ID_RACA);
-            ps.setInt(1, id);
-            ps.setInt(2, cachorro.getId());
-            ps.executeUpdate();
-
-        }finally {
-            if (ps != null)
-                ps.close();
-            if (conn != null)
-                conn.close();
-        }
-
-        return cachorro;
-    }
-    public Cachorro updateIdPelagem(Cachorro cachorro, int id) throws SQLException {
-        Connection conn = null;
-        PreparedStatement ps = null;
-
-        try {
-
-            conn = new ConnectionFactory().getConnection();
-
-            ps = conn.prepareStatement(UPDATE_ID_PELAGEM);
-            ps.setInt(1, id);
-            ps.setInt(2, cachorro.getId());
-            ps.executeUpdate();
-
-        }finally {
-            if (ps != null)
-                ps.close();
-            if (conn != null)
-                conn.close();
-        }
-
-        return cachorro;
-    }
-    public Cachorro updateIdCor(Cachorro cachorro, int id) throws SQLException {
-        Connection conn = null;
-        PreparedStatement ps = null;
-
-        try {
-
-            conn = new ConnectionFactory().getConnection();
-
-            ps = conn.prepareStatement(UPDATE_ID_COR);
-            ps.setInt(1, id);
-            ps.setInt(2, cachorro.getId());
-            ps.executeUpdate();
-
-        }finally {
-            if (ps != null)
-                ps.close();
-            if (conn != null)
-                conn.close();
-        }
-
-        return cachorro;
-    }
-
 
     public Cachorro findById(int id) throws SQLException {
         Connection conn = null;
