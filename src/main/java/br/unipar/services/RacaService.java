@@ -31,9 +31,14 @@ public class RacaService {
         return raca;
     }
 
-    public Raca findById(int id) throws SQLException {
+    public Raca findById(int id) throws SQLException, NegocioException {
+        validateBusca(id);
+
         RacaRepository racaRepository = new RacaRepository();
         Raca raca = racaRepository.findById(id);
+        if (raca == null) {
+            throw new NegocioException("Não encontrado registro no banco de dados de referente ao id digitado");
+        }
         return raca;
     }
 
@@ -41,6 +46,13 @@ public class RacaService {
         RacaRepository racaRepository = new RacaRepository();
         ArrayList<Raca> resultado = racaRepository.findAll();
         return resultado;
+    }
+
+    public void validateBusca (int id) throws SQLException, NegocioException{
+        if(id <= 0){
+            throw new NegocioException("Insira um ID maior que zero" );
+        }
+
     }
 
     private void validate(Raca raca) throws NegocioException {
