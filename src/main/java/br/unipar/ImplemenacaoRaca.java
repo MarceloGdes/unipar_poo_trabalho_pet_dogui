@@ -29,20 +29,18 @@ public class RacaView {
 
         // ATUALIZANDO UMA RAÇA:
 
+        // ATUALIZANDO UMA RAÇA:
+
         Raca racaAlterada = racaService.findById(1);
-        if (racaAlterada != null) {
-            racaAlterada.setDesc("Preto");
-            racaService.update(racaAlterada);
-            System.out.println("Update: " + racaAlterada.toString());
-        }
+        racaAlterada.setDesc("Yorkshire Terrier");
+        racaService.edit(racaAlterada);
+        System.out.println("Update: " + racaAlterada.toString());
 
         // DELETANDO RAÇA:
         int idRacaDeletada = 2;
         Raca racaDeletada = racaService.findById(idRacaDeletada);
-        if (racaDeletada != null) {
-            System.out.println("Delete: " + racaDeletada);
-            racaService.delete(idRacaDeletada);
-        }
+        System.out.println("Delete: " + racaDeletada);
+        racaService.delete(idRacaDeletada);
 
         // LISTAGEM DE RAÇA APÓS EXCLUSÃO:
         System.out.println("All racas after deletion: " + racaService.findAll());
