@@ -4,10 +4,9 @@ import br.unipar.domain.Cor;
 import br.unipar.exceptions.NegocioException;
 import br.unipar.services.CorService;
 
-import javax.swing.*;
 import java.sql.SQLException;
 
-public class CorView {
+public class ImplementaçaoCor {
     public static void main(String[] args) {
 
         try {
@@ -30,7 +29,8 @@ public class CorView {
             System.out.println(corService.findAll());
 
             //Alterado cor
-            Cor corAlterada = corService.findById(1);
+
+            Cor corAlterada = corService.findById(20);
             corAlterada.setDesc("Preto");
             System.out.println("Update: " + corAlterada.toString());
 
@@ -43,11 +43,11 @@ public class CorView {
             System.out.println(corService.findAll());
 
         }catch (SQLException e){
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }catch (NegocioException e){
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }catch (Exception e){
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
 
 
