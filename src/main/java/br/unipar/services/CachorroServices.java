@@ -1,24 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package sistema.cachorro.service;
+package br.unipar.services;
 
-import Domain.Cachorro;
-import exceptions.NegocioException;
+import br.unipar.domain.Cachorro;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
-import repositorie.CachorroRepository;
-import repositorie.CorRepository;
+import br.unipar.exceptions.NegocioException;
+import br.unipar.repositories.CachorroRepository;
 
 
 //Responsável pela lógica do negócio
 public class CachorroServices {
     
     //Valida os atributos de cachorro
-    private void validate(Cachorro cachorro) throws NegocioException{
+    private void validate(Cachorro cachorro) throws NegocioException {
         if(cachorro.getNome() == null){
             throw new NegocioException("O nome deve ser preenchido");
         }
