@@ -74,7 +74,12 @@ public class CachorroService {
         validateBusca(id);
         
         CachorroRepository cachorroRepository = new CachorroRepository();
+
         Cachorro cachorro = cachorroRepository.findById(id);
+
+        if (cachorro == null) {
+            throw new NegocioException("Não encontrado registro no banco de dados de referente ao id digitado");
+        }
         
         
         return cachorro; 
@@ -104,7 +109,7 @@ public class CachorroService {
     }
     
     //Buscar todos os cachorros cadastrados no banco
-    public ArrayList<Cachorro> findAll() throws SQLException {
+    public ArrayList<Cachorro> findAll() throws SQLException, NegocioException {
         
         CachorroRepository cachorroRepository = new CachorroRepository();
         ArrayList<Cachorro> resultado = cachorroRepository.findAll();

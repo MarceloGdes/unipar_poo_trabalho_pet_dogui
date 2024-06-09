@@ -4,6 +4,7 @@ import br.unipar.domain.Cachorro;
 import br.unipar.domain.Cor;
 import br.unipar.domain.Pelagem;
 import br.unipar.domain.Raca;
+import br.unipar.exceptions.NegocioException;
 import br.unipar.infrastructure.ConnectionFactory;
 import br.unipar.services.CorService;
 import br.unipar.services.PelagemService;
@@ -96,7 +97,7 @@ public class CachorroRepository {
         return cachorro;
     }
 
-    public Cachorro findById(int id) throws SQLException {
+    public Cachorro findById(int id) throws SQLException, NegocioException {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -141,7 +142,7 @@ public class CachorroRepository {
         return retorno;
     }
 
-    public ArrayList<Cachorro> findAll() throws SQLException {
+    public ArrayList<Cachorro> findAll() throws SQLException, NegocioException {
         ArrayList<Cachorro> retorno = new ArrayList<>();
         Connection conn = null;
         PreparedStatement pstmt = null;

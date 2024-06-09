@@ -1,17 +1,17 @@
 CREATE TABLE cor(
 	id SERIAL4 PRIMARY KEY,
 	ds_cor VARCHAR(60) NOT NULL
-)
+);
 
 CREATE TABLE pelagem(
 	id SERIAL4 PRIMARY KEY,
 	ds_pelagem VARCHAR(60) NOT NULL
-)
+);
 
 CREATE TABLE raca(
 	id SERIAL4 PRIMARY KEY,
 	ds_raca VARCHAR(60) NOT NULL
-)
+);
 
 CREATE TABLE cachorro(
 	id SERIAL4 PRIMARY KEY,
@@ -22,4 +22,4 @@ CREATE TABLE cachorro(
 	id_raca INT4 REFERENCES raca(id) NOT NULL,
 	id_pelagem INT4 REFERENCES pelagem(id) NOT NULL,
 	id_cor INT4 REFERENCES cor(id) NOT NULL
-)
+);
