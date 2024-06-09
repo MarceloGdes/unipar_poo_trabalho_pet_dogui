@@ -90,11 +90,11 @@ public class Main {
 
 
         }catch (SQLException e){
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }catch (NegocioException e){
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }catch (Exception e){
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
 
     }
