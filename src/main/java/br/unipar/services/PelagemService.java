@@ -42,7 +42,7 @@ public class PelagemService {
             throw new NegocioException("A descrição deve ser preenchida.");
         }
         
-        if (!pelagem.getDesc().matches("[a-zA-Z\\s]+")) { //Expressão regular (regex).
+        if (!pelagem.getDesc().matches("[a-zA-Z\\p{L}\\s]+")) { //Expressão regular (regex).
             throw new NegocioException("A descrição deve conter apenas letras e espaços.");
         }
     }
