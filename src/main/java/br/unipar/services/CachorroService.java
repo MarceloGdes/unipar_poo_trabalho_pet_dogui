@@ -29,7 +29,7 @@ public class CachorroService {
             throw new NegocioException("O nome do cachorro deve ser preenchido");
         }
         
-        if (!cachorro.getNome().matches("[a-zA-Z\\s]+")){
+        if (!cachorro.getNome().matches("[a-zA-Z\\p{L}\\s]+")){
             throw new NegocioException("A descrição deve conter apenas letras e espaços.");
         }
         
@@ -41,7 +41,7 @@ public class CachorroService {
             throw new NegocioException("O tamanho do cachorro precisa ser maior que 0!");
         }
         
-        if(cachorro.getTamanho() < 0.99){
+        if(cachorro.getTamanho() > 0.99){
             throw new NegocioException("O tamanho do cachorro precisa ser menor que 1!");
         }
         

@@ -98,11 +98,10 @@ public class CorService {
 
 
 
-    public void delete(int id) throws SQLException {
+    public void delete(int id) throws SQLException, NegocioException {
+        validateBusca(id);
         CorRepository corRepository = new CorRepository();
         corRepository.delete(id);
-
-
     }
 
 

@@ -88,7 +88,8 @@ public class PelagemService {
     }
 
     //Método para deletar um registro dentro do banco de dados:
-    public void delete(int id) throws SQLException {
+    public void delete(int id) throws SQLException, NegocioException {
+        validateBusca(id);
         PelagemRepository repository = new PelagemRepository();
         repository.delete(id);
     }
@@ -108,7 +109,7 @@ public class PelagemService {
     }
 
     //Método para listar todos os registros.
-    public ArrayList<Pelagem> findAll(int id) throws SQLException {
+    public ArrayList<Pelagem> findAll() throws SQLException {
         PelagemRepository repository = new PelagemRepository();
         ArrayList<Pelagem> retorno = repository.findAll();
 
