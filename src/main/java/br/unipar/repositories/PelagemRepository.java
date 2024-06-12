@@ -66,7 +66,9 @@ public class PelagemRepository {
             
             //Setar o comando enviado.
             prepared.setString(1, pelagem.getDesc());
-            
+
+            prepared.executeUpdate();
+
             //Obter o ID gerado:
             result = prepared.getGeneratedKeys();
             
@@ -104,7 +106,7 @@ public class PelagemRepository {
             prepared = conexao.prepareStatement(UPDATE);
             
             prepared.setString(1, pelagem.getDesc());
-            prepared.setInt(1, pelagem.getId());
+            prepared.setInt(2, pelagem.getId());
             prepared.executeUpdate();
         }finally{
             if(conexao != null){

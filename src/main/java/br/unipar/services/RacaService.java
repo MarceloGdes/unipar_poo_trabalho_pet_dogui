@@ -16,37 +16,6 @@ import java.util.ArrayList;
  */
 public class RacaService {
 
-    public Raca insert(Raca raca) throws SQLException, NegocioException {
-        validate(raca);
-        RacaRepository racaRepository = new RacaRepository();
-        raca = racaRepository.insert(raca);
-        return raca;
-    }
-
-    public Raca edit(Raca raca) throws SQLException, NegocioException {
-        validate(raca);
-        validateUpdate(raca);
-        RacaRepository racaRepository = new RacaRepository();
-        raca = racaRepository.update(raca);
-        return raca;
-    }
-
-    public Raca findById(int id) throws SQLException, NegocioException {
-        validateBusca(id);
-
-        RacaRepository racaRepository = new RacaRepository();
-        Raca raca = racaRepository.findById(id);
-        if (raca == null) {
-            throw new NegocioException("Não encontrado registro no banco de dados de referente ao id digitado");
-        }
-        return raca;
-    }
-
-    public ArrayList<Raca> findAll() throws SQLException {
-        RacaRepository racaRepository = new RacaRepository();
-        ArrayList<Raca> resultado = racaRepository.findAll();
-        return resultado;
-    }
 
     public void validateBusca (int id) throws SQLException, NegocioException{
         if(id <= 0){
@@ -79,7 +48,41 @@ public class RacaService {
         }
     }
 
-    public void delete(int id) throws SQLException {
+    public Raca insert(Raca raca) throws SQLException, NegocioException {
+        validate(raca);
+        RacaRepository racaRepository = new RacaRepository();
+        raca = racaRepository.insert(raca);
+        return raca;
+    }
+
+    public Raca edit(Raca raca) throws SQLException, NegocioException {
+        validate(raca);
+        validateUpdate(raca);
+        RacaRepository racaRepository = new RacaRepository();
+        raca = racaRepository.update(raca);
+        return raca;
+    }
+
+    public Raca findById(int id) throws SQLException, NegocioException {
+        validateBusca(id);
+
+        RacaRepository racaRepository = new RacaRepository();
+        Raca raca = racaRepository.findById(id);
+        if (raca == null) {
+            throw new NegocioException("Não encontrado registro no banco de dados de referente ao id digitado");
+        }
+        return raca;
+    }
+
+    public ArrayList<Raca> findAll() throws SQLException {
+        RacaRepository racaRepository = new RacaRepository();
+        ArrayList<Raca> resultado = racaRepository.findAll();
+        return resultado;
+    }
+
+
+    public void delete(int id) throws SQLException, NegocioException{
+        validateBusca(id);
         RacaRepository racaRepository = new RacaRepository();
         racaRepository.delete(id);
     }

@@ -85,6 +85,7 @@ public class CachorroRepository {
             ps.setInt(5, cachorro.getRaca().getId());
             ps.setInt(6, cachorro.getPelagem().getId());
             ps.setInt(7, cachorro.getCor().getId());
+            ps.setInt(8, cachorro.getId());
             ps.executeUpdate();
 
         }finally {
